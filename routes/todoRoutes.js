@@ -4,9 +4,13 @@ const Todo = require('../models/Todo');
 const router = express.Router();
 
 // Buscar todas as tarefas
-router.get('/todos', async (req, res) => {
-  const todos = await Todo.find();
-  res.json(todos);
+outer.get('/todos', async (req, res) => {
+  try {
+    const todos = await Todo.find();
+    res.json(todos);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Criar uma nova tarefa
